@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacob Innocent | Software Developer</title>
+  <meta name="description" content="Jacob Innocent, software developer. Portfolio of projects built with Go, JavaScript, PHP and MariaDB.">
+
+  <!-- Runs BEFORE the page paints, so a dark-mode visitor never sees a white flash. -->
+        <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            var system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', saved || system);
+            document.documentElement.classList.add('js');   /* NEW: tells CSS that JavaScript is running */
+        })();
+        </script>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main navigation">
+      <a href="#home" class="logo">Jacob<span>.</span></a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark mode"></button>
+        <button class="icon-btn menu-btn" id="menu-btn"
+                aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- Temporary test section: replaced by the real hero in Step 3 -->
+    <section id="home" class="container hero">
+
+        <div class="hero-text">
+            <p class="hero-badge">👋 Welcome to my portfolio</p>
+            <h1>Hi, I'm <span class="highlight">Jacob Innocent</span></h1>
+            <p class="hero-role">Software Developer</p>
+            <p class="hero-bio">
+            I design and build reliable, user-friendly software.
+            I care about clean code and interfaces that feel good to use.
+            </p>
+
+            <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View my work</a>
+            <a href="#contact" class="btn">Contact me</a>
+            </div>
+
+            <div class="socials">
+            <a href="https://github.com/Jacob Innocent" class="btn btn-small" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/JAY25-CMD" class="btn btn-small" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="hero-photo">
+            <img src="images/profile.jpg" alt="Portrait of Jacob Innocent" width="320" height="320">
+        </div>
+
+    </section>
+                <section id="about" class="container section">
+                <h2 class="section-title">About me</h2>
+
+                <div class="about-grid">
+
+                    <div class="about-text">
+                    <p>
+                        I'm Jacob Innocent, a software developer who enjoys turning ideas into
+                        working products. I build web applications from the database up to the
+                        interface, using Go and PHP on the back end and JavaScript, HTML and CSS
+                        on the front end.
+                    </p>
+                    <p>
+                        I like clean, readable code and well-structured data. I work with
+                        MariaDB and SQL to keep that data fast and reliable, and I'm always
+                        learning something new.
+                    </p>
+                    </div>
+
+                    <div class="skills" id="skills">
+                    <h3>Skills</h3>
+                    <ul class="skill-list">
+                        <li class="skill">
+                        <div class="skill-head"><span>Go</span><span>60%</span></div>
+                        <div class="bar" role="progressbar" aria-label="Go skill level"
+                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 60%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>JavaScript</span><span>50%</span></div>
+                        <div class="bar" role="progressbar" aria-label="JavaScript skill level"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 50%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>PHP</span><span>50%</span></div>
+                        <div class="bar" role="progressbar" aria-label="PHP skill level"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 50%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>MariaDB</span><span>75%</span></div>
+                        <div class="bar" role="progressbar" aria-label="MariaDB skill level"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 75%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>SQL</span><span>75%</span></div>
+                        <div class="bar" role="progressbar" aria-label="SQL skill level"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 75%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>HTML</span><span>90%</span></div>
+                        <div class="bar" role="progressbar" aria-label="HTML skill level"
+                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 90%"></span>
+                        </div>
+                        </li>
+                        <li class="skill">
+                        <div class="skill-head"><span>CSS</span><span>70%</span></div>
+                        <div class="bar" role="progressbar" aria-label="CSS skill level"
+                            aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                            <span style="--level: 70%"></span>
+                        </div>
+                        </li>
+                    </ul>
+                    </div>
+
+                </div>
+                </section>
+        <section id="projects" class="container section">
+                <h2 class="section-title">Projects</h2>
+
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                    <p class="status"><span class="status-dot" aria-hidden="true"></span>In progress</p>
+
+                    <h3>Chat System</h3>
+                    <p class="project-desc">
+                        A chat application I'm building from scratch. The back end is written
+                        in Go with MariaDB for storage, and the interface uses plain
+                        JavaScript, HTML and CSS.
+                    </p>
+
+                    <ul class="tags" aria-label="Technologies used">
+                        <li>Go</li>
+                        <li>MariaDB</li>
+                        <li>JavaScript</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                    </ul>
+
+                    <div class="project-links">
+                        <a href="https://github.com/your-username/your-repo" class="btn btn-small"
+                        target="_blank" rel="noopener noreferrer">View code</a>
+                    </div>
+                    </article>
+
+                    <article class="project-card project-placeholder">
+                    <h3>More coming soon</h3>
+                    <p class="project-desc">New projects will be added here as I finish them.</p>
+                    </article>
+
+                </div>
+             </section>
+        <section id="contact" class="container section">
+    <h2 class="section-title">Contact me</h2>
+
+    <div class="contact-grid">
+
+        <div class="contact-info">
+        <h3>Let's talk</h3>
+        <p>
+            Have a project, a question, or just want to say hello?
+            Send me a message and I'll get back to you.
+        </p>
+        <p>
+            <a href="mailto:jacobinnocent416@gmail.com" class="email-link">jacobinnocent416@gmail.com</a>
+        </p>
+        <p>
+            <a href="tel:+255680014004" class="email-link">0680014004</a>
+        </p>
+        </div>
+
+     <form class="contact-form" id="contact-form" data-form-id="plcdus047vb">
+
+        <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="fi-sender-fullName" class="field"
+                autocomplete="name" required>
+        </div>
+
+        <div class="form-row">
+            <label for="email">Your email</label>
+            <input type="email" id="email" name="fi-sender-email" class="field"
+                autocomplete="email" required>
+        </div>
+
+        <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="fi-text-message" class="field"
+                    rows="5" maxlength="1000" required></textarea>
+        </div>
+
+        <!-- Spam trap: no "name", so it is never sent. Real people can't see it; bots may fill it. -->
+        <input type="text" id="hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button type="submit" class="btn btn-primary" id="send-btn">Send message</button>
+        <p class="form-note" id="form-note" role="status"></p>
+     </form>
+
+    </div>
+    </section>
+    </main>
+
+    <footer class="site-footer">
+     <p>&copy; <span id="year"></span> Jacob Innocent. All rights reserved.</p>
+    </footer>
+
+      <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

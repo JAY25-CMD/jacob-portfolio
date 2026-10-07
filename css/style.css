@@ -1,0 +1,528 @@
+/* 1. DESIGN TOKENS (light mode is the default) */
+:root {
+  --bg: #e6ebf2;
+  --text: #2b3045;
+  --muted: #565d75;
+  --accent: #5a4fe0;
+  --border: rgba(0, 0, 0, 0.08);
+
+  /* Neumorphic shadow colors: one darker than --bg, one lighter */
+  --shadow-dark: #b8c1d1;
+  --shadow-light: #ffffff;
+
+  /* Reusable shadow recipes */
+  --raised: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  --inset: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+
+  --radius: 16px;
+  --gap: clamp(1rem, 4vw, 2rem);
+}
+
+/* 2. DARK MODE: only the values change, no other code */
+[data-theme="dark"] {
+  --bg: #1f232d;
+  --text: #e8eaf2;
+  --muted: #a3a9bd;
+  --accent: #9d96ff;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow-dark: #151820;
+  --shadow-light: #2b3140;
+}
+
+/* 3. RESET AND BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* stops the sticky navbar covering section titles */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  transition: background .3s, color .3s;
+}
+
+.container {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+}
+
+/* Visible keyboard focus: important because neumorphism has low contrast */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* 4. NEUMORPHIC COMPONENTS (used only where we chose) */
+.btn {
+  background: var(--bg);
+  color: var(--accent);
+  border: none;
+  padding: .8rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--raised);
+  transition: box-shadow .2s;
+}
+.btn:active { box-shadow: var(--inset); }
+
+.icon-btn {
+  width: 44px;            /* 44px is the usual minimum comfortable touch size */
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--raised);
+  transition: box-shadow .2s;
+}
+.icon-btn:active { box-shadow: var(--inset); }
+
+/* 5. NAVBAR (flat) */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: .8rem;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+.nav-actions { display: flex; gap: .75rem; align-items: center; }
+
+/* Mobile first: the menu is a hidden dropdown under the header */
+.nav-links {
+  list-style: none;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  gap: .25rem;
+  padding: 1rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-links.open { display: flex; }
+
+.nav-links a {
+  display: block;
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* Desktop: show links in a row, hide the hamburger */
+@media (min-width: 768px) {
+  .menu-btn { display: none; }
+  .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    padding: 0;
+    border: none;
+  }
+  .nav { gap: 2rem; }
+  .nav-actions { order: 3; }
+}
+
+
+/* 7. HERO */
+
+/* Mobile first: one column, centered, photo on top */
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  text-align: center;
+  padding-block: clamp(2.5rem, 8vw, 6rem);
+}
+.hero-photo { order: -1; }   /* moves the photo above the text on phones */
+
+.hero-badge {
+  display: inline-block;
+  padding: .4rem 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);  /* min, preferred, max: scales smoothly */
+  line-height: 1.15;
+}
+.highlight { color: var(--accent); }
+
+.hero-role {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: .5rem;
+}
+
+.hero-bio {
+  color: var(--muted);
+  max-width: 52ch;            /* ~52 characters per line is comfortable to read */
+  margin: 1.25rem auto 2rem;
+}
+
+.hero-buttons,
+.socials {
+  display: flex;
+  flex-wrap: wrap;            /* buttons drop to a new line if there's no room */
+  justify-content: center;
+  gap: 1.25rem;
+}
+.socials { margin-top: 2rem; }
+
+/* Link styled as a button needs these extras */
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Main call-to-action: flat accent fill so it stands out from the soft buttons */
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+[data-theme="dark"] .btn-primary { color: #14161f; } /* dark text on light purple keeps contrast */
+
+.btn-small { padding: .55rem 1.3rem; font-size: .9rem; }
+
+/* Photo frame: the one decorative neumorphic highlight */
+.hero-photo img {
+  width: min(70vw, 320px);
+  aspect-ratio: 1;
+  object-fit: cover;          /* crops instead of stretching */
+  border-radius: 50%;
+  padding: 12px;              /* gap between the photo and the frame edge */
+  background: var(--bg);
+  box-shadow: var(--raised);
+}
+
+/* Desktop: two columns, text left, photo right */
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: 1.2fr 1fr;
+    text-align: left;
+  }
+  .hero-photo { order: 0; justify-self: center; }
+  .hero-bio { margin-inline: 0; }
+  .hero-buttons, .socials { justify-content: flex-start; }
+}
+
+/* 8. SHARED SECTION STYLES (reused by Projects and Contact later) */
+.section { padding-block: clamp(3rem, 8vw, 5rem); }
+
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+/* Small accent underline under every section title */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin: .6rem auto 0;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+/* 9. ABOUT + SKILLS */
+
+/* Mobile first: stacked, text then skills */
+.about-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  max-width: 60ch;
+}
+
+/* Skills panel: flat card with a thin border, as planned */
+.skills {
+  padding: var(--gap);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.skills h3 { margin-bottom: 1.25rem; }
+
+.skill-list { list-style: none; display: grid; gap: 1.1rem; }
+
+.skill-head {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: .95rem;
+  margin-bottom: .45rem;
+}
+.skill-head span:last-child { color: var(--muted); }
+
+/* The TRACK: neumorphic inset, looks like a groove carved into the surface */
+.bar {
+  height: 16px;
+  padding: 3px;                 /* keeps the fill inside the groove */
+  border-radius: 50px;
+  background: var(--bg);
+  box-shadow: inset 3px 3px 6px var(--shadow-dark),
+              inset -3px -3px 6px var(--shadow-light);
+}
+
+/* The FILL: flat accent color */
+.bar span {
+  display: block;
+  height: 100%;
+  width: var(--level);          /* each bar reads its own value from the HTML */
+  border-radius: 50px;
+  background: var(--accent);
+}
+
+/* If JavaScript is running, start empty and fill when scrolled into view */
+.js .bar span {
+  width: 0;
+  transition: width 1s ease;
+}
+.js .skills.visible .bar span { width: var(--level); }
+
+/* Respect visitors who turned off animations in their system settings */
+@media (prefers-reduced-motion: reduce) {
+  .js .bar span { transition: none; }
+}
+
+/* Desktop: text on the left, skills on the right */
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 3rem;
+  }
+}
+
+/* 10. PROJECTS */
+
+/* auto-fill + minmax: as many columns as fit, each at least 300px.
+   No media queries needed: 1 column on phones, 2-3 on larger screens. */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.5rem;
+}
+
+/* Flat card with a thin border, as planned */
+.project-card {
+  display: flex;
+  flex-direction: column;       /* lets the links sit at the bottom */
+  gap: .9rem;
+  padding: var(--gap);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform .2s, border-color .2s;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.project-card h3 { font-size: 1.3rem; }
+.project-desc { color: var(--muted); }
+
+/* Status badge: text carries the meaning, the dot is decoration */
+.status {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .25rem .8rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .3; }
+}
+
+/* Technology tags */
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.tags li {
+  padding: .2rem .7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.project-links { margin-top: auto; padding-top: .5rem; }  /* pushes links to the bottom */
+
+/* Placeholder card: dashed border says "empty slot" */
+.project-placeholder {
+  border-style: dashed;
+  justify-content: center;
+  text-align: center;
+  opacity: .8;
+}
+.project-placeholder:hover { transform: none; border-color: var(--border); }
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
+  .project-card { transition: none; }
+  .project-card:hover { transform: none; }
+}
+
+/* 11. CONTACT */
+
+/* Mobile first: info on top, form below */
+.contact-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.contact-info h3 { font-size: 1.4rem; margin-bottom: .75rem; }
+.contact-info p { color: var(--muted); margin-bottom: 1rem; max-width: 45ch; }
+
+.email-link {
+  color: var(--accent);
+  font-weight: 600;
+  word-break: break-all;      /* a long address can't push the page wider on small phones */
+}
+
+.contact-form { display: grid; gap: 1.25rem; }
+
+.form-row { display: grid; gap: .5rem; }
+.form-row label { font-weight: 600; font-size: .95rem; }
+
+/* Neumorphic INSET inputs: look carved into the surface = "type here" */
+.field {
+  width: 100%;
+  padding: .85rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;               /* inputs ignore the page font unless told to inherit */
+  box-shadow: var(--inset);
+}
+textarea.field { resize: vertical; min-height: 130px; }
+
+.contact-form .btn { justify-self: start; }
+
+.form-note { color: var(--muted); font-size: .9rem; min-height: 1.4em; }
+
+/* Desktop: two columns */
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+/* 12. FOOTER */
+.site-footer {
+  padding-block: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: .9rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Spam trap field: off-screen, not display:none (some bots skip display:none fields) */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Send button while the message is being sent */
+.btn:disabled { opacity: .6; cursor: wait; }
+
+/* Success and error message colors (text is still the main signal) */
+.form-note.success { color: #1e7a46; }
+.form-note.error   { color: #c0392b; }
+[data-theme="dark"] .form-note.success { color: #5fd18c; }
+[data-theme="dark"] .form-note.error   { color: #ff8a7a; }
+
+/* 13. ACCESSIBILITY AND POLISH */
+
+/* Skip link: hidden above the screen until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 200;
+  padding: .7rem 1.2rem;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+[data-theme="dark"] .skip-link { color: #14161f; }
+.skip-link:focus { top: 1rem; }
+
+/* Images can never be wider than their container */
+img { max-width: 100%; }
+
+/* Long words or links wrap instead of forcing sideways scrolling */
+body { overflow-wrap: break-word; }
+
+/* Navbar: highlight the section the visitor is currently reading */
+.nav-links a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Skip link target should not show a focus box when it receives focus */
+main:focus { outline: none; }
